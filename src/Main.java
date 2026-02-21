@@ -7,8 +7,7 @@ import java.util.Scanner;
 public class Main {
 
     private static final Scanner sc = new Scanner(System.in);
-    private static ManejoTurnos niggaTurnos; //🥷
-    private static int idTurno;
+    private static ManejoTurnos niggaTurnos;
 
     public static void mostrarOpciones() {
         System.out.println("\n--- MENU TURNOS (choose wisely) ---");
@@ -24,21 +23,23 @@ public class Main {
 
     private static void registrarTurno() {
         try {
+            System.out.print("ID del turno (número > 0): ");
+            int id = Integer.parseInt(sc.nextLine());
             System.out.print("Tipo (P preferencial / G general): ");
             String t = sc.nextLine();
-            if (t.isEmpty()) { System.out.println("❌ Tipo? cual tipo? pon algo"); return; }  //miramos a ver si el usuario puso algo, sino no podemos sacar el char
-            char tipo = t.charAt(0); // sacamos el primer char del string
+            if (t.isEmpty()) { System.out.println("❌ Tipo? cual tipo? pon algo"); return; }
+            char tipo = t.charAt(0);
             System.out.print("Tiempo estimado (1-60 minutos): ");
             int tiempo = Integer.parseInt(sc.nextLine());
 
-            boolean ok = niggaTurnos.registrarTurno(idTurno++, tipo, tiempo);
+            boolean ok = niggaTurnos.registrarTurno(id, tipo, tiempo);
             if (ok) {
-                System.out.println("✅ Turno #" + (idTurno-1) + " registrado! que vueltas da la vida eh");
+                System.out.println("✅ Turno #" + id + " registrado! que vueltas da la vida eh");
             } else {
                 System.out.println("❌ Nah, no se pudo. capaz ya existe ese turno o la cola esta llena");
             }
-        } catch (NumberFormatException ex) {
-            System.out.println("❌ Ey, pon números! no ficción científica");
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Ey, ponga numeros perro hpta");
         }
     }
 
@@ -48,7 +49,7 @@ public class Main {
 
     private static void cancelarTurno() {
         try {
-            System.out.print("ID a cancelar (yeet it chao hpta): ");
+            System.out.println("ID a cancelar (yeet it chao hpta): ");
             mostrarCola();
             int id = Integer.parseInt(sc.nextLine());
             boolean ok = niggaTurnos.cancelarPorId(id);
@@ -58,12 +59,14 @@ public class Main {
                 System.out.println("❌ Ese ID no existe boludo, mira bien la cola");
             }
         } catch (NumberFormatException ex) {
-            System.out.println("❌ ID? eso no se ve como un número che");
+            System.out.println("❌ Eso no parece un numero ");
         }
     }
 
     private static void insertarTurnoUrgente() {
         try {
+            System.out.print("ID del turno urgente (número > 0): ");
+            int id = Integer.parseInt(sc.nextLine());
             System.out.print("Posición donde colarce(corlarse)? (0 = adelante de todos): ");
             mostrarCola();
             int pos = Integer.parseInt(sc.nextLine());
@@ -75,7 +78,7 @@ public class Main {
             System.out.print("Tiempo (1-60): ");
             int tiempo = Integer.parseInt(sc.nextLine());
 
-            boolean ok = niggaTurnos.insertarUrgente(idTurno++, tipo, tiempo, pos);
+            boolean ok = niggaTurnos.insertarUrgente(id, tipo, tiempo, pos);
             if (ok) {
                 System.out.println("✅ SIIIU! Te colaste en la fila en la posición " + pos);
             } else {
