@@ -3,12 +3,12 @@ package Classes;
 public class ManejoTurnos {
     private int capacidad = 50;
 
-    private int[] ids;
+    private int[] ids =;
     private char[] tipos;
     private int[] tiempos;
     private int n = 0;
 
-    public ManejoTurnos(int capacidad) {
+    public ManejoTurnos() {
         ids = new int[capacidad];
         tipos = new char[capacidad];
         tiempos = new int[capacidad];

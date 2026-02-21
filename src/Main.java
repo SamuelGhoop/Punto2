@@ -96,10 +96,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.print("Cuantos turnos entran? (capacidad): ");
-        int capacidad = Integer.parseInt(sc.nextLine());
-        niggaTurnos = new ManejoTurnos(capacidad);
-        System.out.println("✅ Dale! Sistema listo para el caos con " + capacidad + " turnos");
+
+        niggaTurnos = new ManejoTurnos();
+        System.out.println("Hola tio Sistema listo para el caos con 50 turnos");
 
         int opcion = -1;
         do {
