@@ -1,14 +1,17 @@
 package Classes;
 
 public class ManejoTurnos {
-    private static final int capacidad = 50;
+    private int capacidad = 50;
 
-    private final int[] ids = new int[capacidad];
-    private final char[] tipos = new char[capacidad];
-    private final int[] tiempos = new int[capacidad];
+    private int[] ids;
+    private char[] tipos;
+    private int[] tiempos;
     private int n = 0;
 
-    public ManejoTurnos() {
+    public ManejoTurnos(int capacidad) {
+        ids = new int[capacidad];
+        tipos = new char[capacidad];
+        tiempos = new int[capacidad];
     }
 
     private int buscarPorId(int id) {
@@ -108,60 +111,58 @@ public class ManejoTurnos {
         return true;
     }
 //AYUDA
-public void mostrarEstadisticas() {
-    if (n == 0) {
-        System.out.println("No hay turnos para calcular estadísticas.");
-        return;
-    }
-
-    int sumaTiempos = 0;                                              //todos en 0 para sumarles despues
-    int pref = 0;
-    int gen = 0;
-
-    int maxTiempo = -1;                                                //Todavia no sabemos cual es el max de ninguno de estos
-    int maxId = -1;
-    char maxTipo = '?';
-    int multiplos5 = 0;                                                // Cuenta tiempos múltiplos de 5 empieza en 0 por lo mismo
-
-    for (int i = 0; i < n; i++) {
-        int t = tiempos[i];                                           //tiempo de la posicion i
-        char tipo = Character.toUpperCase(tipos[i]);                   // Tipo de posicion i llevada a mayuscula G-P
-
-        sumaTiempos += t;                                              // Suma para promedio
-
-        if (tipo == 'P') pref++;                                       // Suma preferenciales
-        else if (tipo == 'G') gen++;                                   // Suma generales
-
-        if (t > maxTiempo) {                                           // Si este tiempo es el mayor
-            maxTiempo = t;                                             // Actualiza mayor tiempo
-            maxId = ids[i];                                            // Guarda id asociado
-            maxTipo = tipo;                                            // Guarda tipo asociado
-        }
-
-        if (t % 5 == 0) multiplos5++;                                  // Cuenta si es múltiplo de 5
-    }
-
-    double promedio = (double) sumaTiempos / n;                        // Promedio de tiempo
-    double porcPref = (double) pref * 100 / n;                         // % preferenciales
-    double porcGen = (double) gen * 100 / n;                           // % generales
-
-    System.out.println("a) Promedio del tiempo estimado: " + promedio);
-    System.out.println("b) % Preferenciales: " + porcPref + " , % Generales: " + porcGen);
-    System.out.println("c) Mayor tiempo estimado: ID=" + maxId + ", Tipo=" + maxTipo + ", Tiempo=" + maxTiempo);
-    System.out.println("d) Cantidad de turnos con tiempo múltiplo de 5: " + multiplos5);
-}
-
-    public void mostrarCola() {
+    public void mostrarEstadisticas() {
         if (n == 0) {
-            System.out.println("No hay nada en la cola.");
+            System.out.println("No hay turnos para calcular estadísticas.");
             return;
         }
 
-        System.out.println("\nPos\tID\tTipo\tTiempo");  //\t tabulacion
+        int sumaTiempos = 0;                                              //todos en 0 para sumarles despues
+        int pref = 0;
+        int gen = 0;
+
+        int maxTiempo = -1;                                                //Todavia no sabemos cual es el max de ninguno de estos
+        int maxId = -1;
+        char maxTipo = '?';
+        int multiplos5 = 0;                                                // Cuenta tiempos múltiplos de 5 empieza en 0 por lo mismo
+
         for (int i = 0; i < n; i++) {
-            System.out.println(i + "\t" + ids[i] + "\t" + tipos[i] + "\t" + tiempos[i]);
+            int t = tiempos[i];                                           //tiempo de la posicion i
+            char tipo = Character.toUpperCase(tipos[i]);                   // Tipo de posicion i llevada a mayuscula G-P
+
+            sumaTiempos += t;                                              // Suma para promedio
+
+            if (tipo == 'P') pref++;                                       // Suma preferenciales
+            else if (tipo == 'G') gen++;                                   // Suma generales
+
+            if (t > maxTiempo) {                                           // Si este tiempo es el mayor
+                maxTiempo = t;                                             // Actualiza mayor tiempo
+                maxId = ids[i];                                            // Guarda id asociado
+                maxTipo = tipo;                                            // Guarda tipo asociado
+            }
+
+            if (t % 5 == 0) multiplos5++;                                  // Cuenta si es múltiplo de 5
         }
+
+        double promedio = (double) sumaTiempos / n;                        // Promedio de tiempo
+        double porcPref = (double) pref * 100 / n;                         // % preferenciales
+        double porcGen = (double) gen * 100 / n;                           // % generales
+
+        System.out.println("Promedio del tiempo estimado: " + promedio);
+        System.out.println("% Preferenciales: " + porcPref + " , % Generales: " + porcGen);
+        System.out.println("Mayor tiempo estimado: ID=" + maxId + ", Tipo=" + maxTipo + ", Tiempo=" + maxTiempo);
+        System.out.println("Cantidad de turnos con tiempo múltiplo de 5: " + multiplos5);
     }
 
+        public void mostrarCola() {
+            if (n == 0) {
+                System.out.println("No hay nada en la cola.");
+                return;
+            }
 
-}
+            System.out.println("Pos\tID\tTipo\tTiempo");  //\t tabulacion
+            for (int i = 0; i < n; i++) {
+                System.out.println(i + "\t" + ids[i] + "\t" + tipos[i] + "\t" + tiempos[i]);
+            }
+        }
+    }
