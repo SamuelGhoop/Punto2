@@ -3,7 +3,7 @@ package Classes;
 public class ManejoTurnos {
     private int capacidad = 50;
 
-    private int[] ids =;
+    private int[] ids;
     private char[] tipos;
     private int[] tiempos;
     private int n = 0;
