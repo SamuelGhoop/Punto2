@@ -5,6 +5,12 @@ public class Turno {
     private char tipo;
     private int tiempoEstimado;
 
+    public Turno(int idTurno, char tipo, int tiempoEstimado) {
+        this.idTurno = idTurno;
+        this.tipo = tipo;
+        this.tiempoEstimado = tiempoEstimado;
+    }
+
     public int getIdTurno() {
         return idTurno;
     }
