@@ -102,7 +102,7 @@ Tiempo estimado (1-60 minutos): 30
 
 ## Autor 👨‍💻
 
-Hecho con cierto grado de caos y muy poco sueño.
+Hecho por Samuel Giraldo(SamuelGhoop) y Alejandro Urrego(Alejandruxxug) 
 
 ---
 
